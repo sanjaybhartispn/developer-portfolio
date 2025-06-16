@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Image Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #0f0f0f;
+      color: #fff;
+      padding: 40px 20px;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+    }
+
+    .gallery {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .gallery-item {
+      min-width: 300px;
+      margin-right: 20px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.03);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .overlay {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+    }
+
+    .gallery-item:hover .overlay {
+      opacity: 1;
+    }
+
+    .overlay h3 {
+      color: #fff;
+      font-size: 1.2rem;
+    }
+
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 12px 30px;
+      font-size: 16px;
+      background: #00ffff;
+      color: #000;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #00b3b3;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>My Best Image Gallery</h1>
+  <button id="nextBtn">Next Image</button>
+  <div class="gallery" id="gallery">
+    <div class="gallery-item">
+      <img src="https://source.unsplash.com/800x600/?nature" alt="Nature">
+      <div class="overlay">
+        <h3>Nature</h3>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://source.unsplash.com/800x600/?technology" alt="Technology">
+      <div class="overlay">
+        <h3>Technology</h3>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://source.unsplash.com/800x600/?travel" alt="Travel">
+      <div class="overlay">
+        <h3>Travel</h3>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/img/portfolio/branding-1.jpg" alt="Food">
+      <div class="overlay">
+        <h3>Food</h3>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/img/portfolio/branding-1.jpg" alt="Architecture">
+      <div class="overlay">
+        <h3>Architecture</h3>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="assets/img/portfolio/branding-1.jpgs" alt="Animals">
+      <div class="overlay">
+        <h3>Animals</h3>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const gallery = document.getElementById('gallery');
+    const nextBtn = document.getElementById('nextBtn');
+    let position = 0;
+    const itemWidth = 320; // 300px + margin
+
+    nextBtn.addEventListener('click', () => {
+      position -= itemWidth;
+      if (Math.abs(position) >= gallery.scrollWidth - window.innerWidth) {
+        position = 0; // Reset to start
+      }
+      gallery.style.transform = `translateX(${position}px)`;
+    });
+  </script>
+</body>
+
+</html>

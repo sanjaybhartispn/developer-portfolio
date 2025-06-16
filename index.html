@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Responsive Canvas Portfolio</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -12,7 +18,8 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    html, body {
+    html,
+    body {
       width: 100%;
       height: 100%;
       overflow: hidden;
@@ -67,23 +74,65 @@
       animation: fadeIn 3s ease;
     }
 
+    .blinking-text {
+      font-size: 60px;
+      color: #00ffff;
+      animation: blinkColor 2s infinite;
+    }
+
+    @keyframes blinkColor {
+      0% {
+        color: #00ffff;
+        opacity: 1;
+      }
+
+      25% {
+        color: #ff00ff;
+        opacity: 0.7;
+      }
+
+      50% {
+        color: #ffff00;
+        opacity: 1;
+      }
+
+      75% {
+        color: #ff6600;
+        opacity: 0.7;
+      }
+
+      100% {
+        color: #00ffff;
+        opacity: 1;
+      }
+    }
+
     .container button:hover {
       background: #00b3b3;
       transform: scale(1.05);
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @media (max-width: 768px) {
       .container h1 {
         font-size: 40px;
       }
+
       .container p {
         font-size: 18px;
       }
+
       .container button {
         font-size: 18px;
         padding: 12px 30px;
@@ -94,9 +143,11 @@
       .container h1 {
         font-size: 28px;
       }
+
       .container p {
         font-size: 16px;
       }
+
       .container button {
         font-size: 16px;
         padding: 10px 25px;
@@ -104,64 +155,71 @@
     }
   </style>
 </head>
+
 <body>
 
-<canvas id="background"></canvas>
+  <canvas id="background"></canvas>
 
-<div class="container">
-  <h1>Hello, I'm Sanjay</h1>
-  <p>I create fast, responsive, and beautiful websites using WordPress, Elementor, WooCommerce, and SEO optimization. Let's build your online presence!</p>
-  <a href="home.html">
-  <button>View My Work</button>
-</a>
+  <div class="container">
+    <h1 class="blinking-text">Hello, I'm Sanjay</h1>
 
-</div>
+    <p>I create fast, responsive, and beautiful websites using WordPress, Elementor, WooCommerce, and SEO optimization.
+      Let's build your online presence!</p>
+    <a href="home.html">
+      <button>View My Work</button>
+    </a>
 
-<script>
-  const canvas = document.getElementById('background');
-  const ctx = canvas.getContext('2d');
+  </div>
 
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
+  <script>
+    const canvas = document.getElementById('background');
+    const ctx = canvas.getContext('2d');
 
-  window.addEventListener('resize', resize);
-  resize();
-
-  const particles = [];
-  const numParticles = 80;
-
-  for (let i = 0; i < numParticles; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      size: Math.random() * 3 + 1,
-      speedX: (Math.random() - 0.5) * 1.5,
-      speedY: (Math.random() - 0.5) * 1.5
-    });
-  }
-
-  function drawParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < numParticles; i++) {
-      const p = particles[i];
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(0,255,255,0.7)';
-      ctx.fill();
-
-      p.x += p.speedX;
-      p.y += p.speedY;
-
-      if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
-      if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
-    requestAnimationFrame(drawParticles);
-  }
 
-  drawParticles();
-</script>
+    window.addEventListener('resize', resize);
+    resize();
+
+    const particles = [];
+    const numParticles = 80;
+
+    for (let i = 0; i < numParticles; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 3 + 1,
+        speedX: (Math.random() - 0.5) * 1.5,
+        speedY: (Math.random() - 0.5) * 1.5
+      });
+    }
+
+    function drawParticles() {
+      // Yeh important hai — canvas ko blank karne ke liye full black background fill karo
+      ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < numParticles; i++) {
+        const p = particles[i];
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0,255,255,0.7)';
+        ctx.fill();
+
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+      }
+      requestAnimationFrame(drawParticles);
+    }
+
+    drawParticles();
+  </script>
 
 </body>
+
 </html>
